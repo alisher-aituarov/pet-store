@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: database_pet
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: petstore
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+  backend:
+    container_name: backend_pet
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: npm run start:dev
+    ports:
+      - "4000:4000"
+  frontend:
+    container_name: frontend_pet
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: on-failure
+    command: npm run dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/frontend/.next
+    ports:
+      - '3000:3000'
