@@ -9,3 +9,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          Int     @id @default(autoincrement())
+  name        String
+  password    String
+  phoneNumber String  @unique
+  email       String  @unique
+  role        Role    @default(USER)
+  avatar      Picture @relation(fields: [avatarId], references: [id])
+  avatarId    Int
+}
+
+model Picture {
+  id   Int    @id @default(autoincrement())
+  url  String @unique
+  User User[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}

@@ -1,8 +1,7 @@
 version: "3.8"
 
 services:
-  postgres:
-    container_name: database_pet
+  db:
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: root
@@ -11,7 +10,7 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
-      - 5434:5432
+      - 5432:5432
   backend:
     container_name: backend_pet
     build:
