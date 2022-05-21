@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   password    String
-  phoneNumber String  @unique
-  email       String  @unique
-  role        Role    @default(USER)
-  avatar      Picture @relation(fields: [avatarId], references: [id])
-  avatarId    Int
+  phoneNumber String   @unique
+  email       String   @unique
+  role        Role     @default(USER)
+  confrmed    Boolean  @default(false)
+  avatar      Picture? @relation(fields: [avatarId], references: [id])
+  avatarId    Int?
 }
 
 model Picture {
@@ -27,7 +28,20 @@ model Picture {
   User User[]
 }
 
+model ConfirmationCodes {
+  id        Int                  @id @default(autoincrement())
+  type      ConfirmationCodeType
+  code      String
+  createdAt DateTime             @default(now())
+  expiresAt DateTime
+}
+
 enum Role {
   USER
   ADMIN
+}
+
+enum ConfirmationCodeType {
+  REGISTRATION
+  RECOVERING
 }
