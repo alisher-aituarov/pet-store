@@ -52,6 +52,16 @@ model Region {
   @@map("regions")
 }
 
+model Category {
+  id       Int        @id @default(autoincrement())
+  name     String
+  parentId Int?
+  parent   Category?  @relation("CategoryChildren", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryChildren")
+
+  @@map("categories")
+}
+
 enum Role {
   USER
   ADMIN
