@@ -25,9 +25,11 @@ model User {
 }
 
 model Picture {
-  id   Int    @id @default(autoincrement())
-  url  String @unique
-  User User[]
+  id    Int    @id @default(autoincrement())
+  url   String @unique
+  User  User[]
+  Pet   Pet?   @relation(fields: [petId], references: [id])
+  petId Int?
 
   @@map("pictures")
 }
@@ -49,6 +51,7 @@ model Region {
   parentId Int?
   parent   Region?  @relation("RegionChildren", fields: [parentId], references: [id])
   children Region[] @relation("RegionChildren")
+  Pet      Pet[]
 
   @@map("regions")
 }
@@ -61,6 +64,7 @@ model Category {
   parent   Category?  @relation("CategoryChildren", fields: [parentId], references: [id])
   children Category[] @relation("CategoryChildren")
   Breed    Breed[]
+  Pet      Pet[]
 
   @@map("categories")
 }
@@ -71,13 +75,37 @@ model Breed {
   slug       String
   categoryId Int
   catogory   Category @relation(fields: [categoryId], references: [id])
+  Pet        Pet[]
 
   @@map("breeds")
+}
+
+model Pet {
+  id          Int       @id @default(autoincrement())
+  age         Int
+  sex         Sex
+  weight      Int?
+  sterilized  Boolean?
+  categoryId  Int?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  regionId    Int?
+  region      Region?   @relation(fields: [regionId], references: [id])
+  breedId     Int?
+  breed       Breed?    @relation(fields: [breedId], references: [id])
+  pictures    Picture[]
+  description String
+
+  @@map("pets")
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum Sex {
+  MALE
+  FEMALE
 }
 
 enum ConfirmationCodeType {
