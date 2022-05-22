@@ -20,12 +20,16 @@ model User {
   confrmed    Boolean  @default(false)
   avatar      Picture? @relation(fields: [avatarId], references: [id])
   avatarId    Int?
+
+  @@map("users")
 }
 
 model Picture {
   id   Int    @id @default(autoincrement())
   url  String @unique
   User User[]
+
+  @@map("pictures")
 }
 
 model ConfirmationCodes {
@@ -34,6 +38,18 @@ model ConfirmationCodes {
   code      String
   createdAt DateTime             @default(now())
   expiresAt DateTime
+
+  @@map("confirmation_codes")
+}
+
+model Region {
+  id       Int      @id @default(autoincrement())
+  name     String
+  parentId Int?
+  parent   Region?  @relation("RegionChildren", fields: [parentId], references: [id])
+  children Region[] @relation("RegionChildren")
+
+  @@map("regions")
 }
 
 enum Role {
