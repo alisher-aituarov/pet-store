@@ -45,6 +45,7 @@ model ConfirmationCodes {
 model Region {
   id       Int      @id @default(autoincrement())
   name     String
+  slug     String
   parentId Int?
   parent   Region?  @relation("RegionChildren", fields: [parentId], references: [id])
   children Region[] @relation("RegionChildren")
@@ -55,11 +56,23 @@ model Region {
 model Category {
   id       Int        @id @default(autoincrement())
   name     String
+  slug     String
   parentId Int?
   parent   Category?  @relation("CategoryChildren", fields: [parentId], references: [id])
   children Category[] @relation("CategoryChildren")
+  Breed    Breed[]
 
   @@map("categories")
+}
+
+model Breed {
+  id         Int      @id @default(autoincrement())
+  name       String
+  slug       String
+  categoryId Int
+  catogory   Category @relation(fields: [categoryId], references: [id])
+
+  @@map("breeds")
 }
 
 enum Role {
