@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Kazakhstan",
+    "slug": "kazakhstan",
+    "children": [
+      {
+        "name": "Kostanay",
+        "slug": "kazakhstan",
+        "children": [
+          {
+            "name": "Auliekol",
+            "slug": "auliekol",
+            "children": []
+          },
+          {
+            "name": "Fedoseevka",
+            "slug": "fedoseevka",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Almaty",
+        "slug": "almaty",
+        "children": [
+          {
+            "name": "Moscow",
+            "slug": "moscow",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
