@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Cats",
+    "slug": "cats",
+    "children": [
+      {
+        "name": "Home cats",
+        "slug": "home-cats",
+        "children": [
+          {
+            "name": "Three color",
+            "slug": "three-color",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Wild cats",
+        "slug": "wild-cats",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Dogs",
+    "slug": "dogs",
+    "children": [
+      {
+        "name": "Home dogs",
+        "slug": "home-dogs",
+        "children": []
+      },
+      {
+        "name": "Wild dogs",
+        "slug": "wild-dogs",
+        "children": []
+      }
+    ]
+  }
+]
